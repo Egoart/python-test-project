@@ -2,6 +2,9 @@
 body_mass = input('Enter your body weight in kg ')
 height = input ('Enter your height in cm ')
 
+#add another variable -- gender
+gender = input ('Answer: Are you male/female/something else? ')
+
 #convert height from cm to meter
 height_meters = int(height)/100
 
@@ -36,8 +39,34 @@ if bmi in range(16, 54):
 else:
     print ('You have a serious weight problem')
 
+# By gender
 
-
+if gender == 'female':
+    if bmi <= 18:
+        print ('You are anorexic. Urgently consult a doctor.')
+    elif bmi in range(19, 25):
+        print ('You don not have weight problems. Congratulations!')
+    elif bmi in range(26, 30):
+        print ('You have signs of obesity. Consult a doctor.')
+    elif bmi in range(31, 40):
+        print ('You are obese. Consult a doctor.')
+    else:
+        print ('You are extremely obese. Urgently consult a doctor.')
+elif gender == 'male':
+    if bmi <= 19:
+        print ('You are underweight. Urgently consult a doctor.')
+    elif bmi in range(20, 27):
+        print ('You don not have weight problems. Congratulations!')
+    elif bmi in range(28, 33):
+        print ('You have signs of obesity. Consult a doctor.')
+    elif bmi in range(34, 44):
+        print ('You are obese. Consult a doctor.')
+    else:
+        print ('You are extremely obese. Urgently consult a doctor.')
+else:
+    print ("The result may not be correct for you. Please find appropriate BMI caulculator.")
+    
+print ()    
 
 
 
