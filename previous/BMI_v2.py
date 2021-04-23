@@ -37,7 +37,7 @@ if bmi in range(16, 54):
     print (bmi_full_scale)
     print ()
 else:
-    print ('You have a serious weight problem')
+    print ('You have serious weight problem')
 
 # By gender
 
