@@ -24,4 +24,9 @@ def airports(request, code):
     return render(request, template_name='airports.html', context=ctx)
 
 def airports_home(request):
-    return render(request, template_name='index.html', context={})
+    codes = AIRPORTS_CODES.keys()
+    
+    cctx = {
+        'codes': codes
+    }
+    return render(request, template_name='index.html', context=cctx)
