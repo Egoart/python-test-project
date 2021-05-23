@@ -12,7 +12,7 @@ class Authors(models.Model):
         )
 
     def __str__(self) -> str:
-        return f'Автор {self.first_name }{self.second_name}'
+        return f'Автор {self.first_name} {self.last_name}'
 
     class Meta:
         verbose_name = 'Автор'
