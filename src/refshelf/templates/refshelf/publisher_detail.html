@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Об издательстве{% endblock %}
+    
+{% block h1 %}Издательство: {{ object.publisher_name }}{% endblock %}
+    
+{% block content %}<p>{{ object.publisher_description}}</p>{% endblock %}
+    

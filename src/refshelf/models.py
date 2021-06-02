@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Authors(models.Model):
@@ -12,7 +13,10 @@ class Authors(models.Model):
         )
 
     def __str__(self) -> str:
-        return f'Автор {self.first_name} {self.last_name}'
+        return f' {self.first_name} {self.last_name}'
+
+    def get_absolute_url(self):
+        return reverse('author', kwargs={'pk': self.pk})    
 
     class Meta:
         verbose_name = 'Автор'
@@ -29,7 +33,10 @@ class Genre(models.Model):
         null=True
     )
     def __str__(self) -> str:
-        return f'Название жанра {self.genre_name}'
+        return f'{self.genre_name}'
+
+    def get_absolute_url(self):
+        return reverse('genre', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Жанр'
@@ -48,6 +55,9 @@ class Publisher(models.Model):
     def __str__(self) -> str:
         return f'Издательство {self.publisher_name}'
 
+    def get_absolute_url(self):
+        return reverse('publisher', kwargs={'pk': self.pk})
+
     class Meta:
         verbose_name = 'Издательство'
         verbose_name_plural = 'Издательства'
@@ -64,6 +74,9 @@ class BookSeries(models.Model):
     )
     def __str__(self) -> str:
         return f'Серия {self.series_name}'
+
+    def get_absolute_url(self):
+        return reverse('series', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Серия'

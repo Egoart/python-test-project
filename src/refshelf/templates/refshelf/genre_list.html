@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Список жанров{% endblock %}
+    
+{% block h1 %}Список жанров:{% endblock %}
+{% block content %}
+<div class="mb-3 mt-1">
+  <a href="{% url 'genre_create' %}" class="btn btn-primary">Добавить новый жанр</a>
+</div>
+<div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>        
+      </tr>
+    </thead>
+    <tbody>
+      {% for genre in object_list %}
+      <tr>
+        <td><a href="{% url 'genre' genre.pk %}">{{ genre }}</a></td>
+        <td><a href="{% url 'genre_update' genre.pk %}">Редактировать</a></td>
+        <td><a href="{% url 'genre_delete' genre.pk %}">Удалить</a></td>  
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+    

@@ -1,53 +1,89 @@
 from django.shortcuts import render
-
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 from . import models 
 
 # Create your views here.
 
-def author(request, author_id):
-    author = models.Authors.objects.get(pk=author_id)
-    ctx = {
-        'author': author
-    }
-    return render(request, template_name='author.html', context=ctx)
+class AuthorDetails(DetailView):
+    model = models.Authors
+
+class AuthorList(ListView):
+    model = models.Authors
+
+class AuthorCreate(CreateView):
+    model = models.Authors
+    fields = ['first_name', 'last_name']
+
+class AuthorUpdate(UpdateView):
+    model = models.Authors
+    fields = ['first_name', 'last_name']
+
+class AuthorDelete(DeleteView):
+    model = models.Authors
+    success_url = reverse_lazy('authors')
+
+class GenreDetails(DetailView):
+    model = models.Genre
+
+class GenreList(ListView):
+    model = models.Genre
+
+class GenreCreate(CreateView):
+    model = models.Genre
+    fields = ['genre_name', 'genre_description']
+
+class GenreUpdate(UpdateView):
+    model = models.Genre
+    fields = ['genre_name', 'genre_description']
+
+class GenreDelete(DeleteView):
+    model = models.Genre
+    success_url = reverse_lazy('genres')
+
+class PublisherDetails(DetailView):
+    model = models.Publisher
+
+class PublisherList(ListView):
+    model = models.Publisher
+
+class PublisherCreate(CreateView):
+    model = models.Publisher
+    fields = ['publisher_name', 'publisher_description']
+
+class PublisherUpdate(UpdateView):
+    model = models.Publisher
+    fields = ['publisher_name', 'publisher_description']
+
+class PublisherDelete(DeleteView):
+    model = models.Publisher
+    success_url = reverse_lazy('publishers')
+
+class SeriesDetails(DetailView):
+    model = models.BookSeries
+
+class SeriesList(ListView):
+    model = models.BookSeries
+
+class SeriesCreate(CreateView):
+    model = models.BookSeries
+    fields = ['series_name', 'series_description']
+
+class SeriesUpdate(UpdateView):
+    model = models.BookSeries
+    fields = ['series_name', 'series_description']
+
+class SeriesDelete(DeleteView):
+    model = models.BookSeries
+    success_url = reverse_lazy('serieses')
 
 
-def author_list(request):
-    author_list = models.Authors.objects.all()
-    ctx = {
-        'author_list': author_list
-    }
-    return render(request, template_name='author_list.html', context=ctx)
-
-def genre(request, genre_id):
-    genre = models.Genre.objects.get(pk=genre_id)
-    ctx = {
-        'genre': genre
-    }
-    return render(request, template_name='genre.html', context=ctx)
-
-
-def genre_list(request):
-    genre_list = models.Genre.objects.all()
-    ctx = {
-        'genre_list': genre_list
-    }
-    return render(request, template_name='genre_list.html', context=ctx)
-
-def publisher(request, publisher_id):
-    publisher = models.Publisher.objects.get(pk=publisher_id)
-    ctx = {
-        'publisher': publisher
-    }
-    return render(request, template_name='publisher.html', context=ctx)
-
-
-def publisher_list(request):
-    publisher_list = models.Publisher.objects.all()
-    ctx = {
-        'publisher_list': publisher_list
-    }
-    return render(request, template_name='publisher_list.html', context=ctx)
 
 def series(request, series_id):
     series = models.BookSeries.objects.get(pk=series_id)

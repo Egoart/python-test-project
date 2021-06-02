@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Список издательств{% endblock %}
+    
+{% block h1 %}Список издательств:{% endblock %}
+{% block content %}
+<div class="mb-3 mt-1">
+  <a href="{% url 'publisher_create' %}" class="btn btn-primary">Добавить новое издательство</a>
+</div>
+<div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>        
+      </tr>
+    </thead>
+    <tbody>
+      {% for publisher in object_list %}
+      <tr>
+        <td><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a></td>
+        <td><a href="{% url 'publisher_update' publisher.pk %}">Редактировать</a></td>
+        <td><a href="{% url 'publisher_delete' publisher.pk %}">Удалить</a></td>  
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+  
