@@ -4,5 +4,10 @@
     
 {% block h1 %}Издательство: {{ object.publisher_name }}{% endblock %}
     
-{% block content %}<p>{{ object.publisher_description}}</p>{% endblock %}
+{% block content %}
+<div>{{ object.publisher_description}}</div>
+<div class='mt-3'>
+    <a class="btn btn-outline-primary" href="{% url 'refshelf:publishers' %}">К списку издательств</a>    
+</div>
+{% endblock %}
     

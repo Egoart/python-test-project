@@ -4,5 +4,10 @@
     
 {% block h1 %}Серия: {{ object.series_name }}{% endblock %}
     
-{% block content %}<p>{{ object.series_description}}</p>{% endblock %}
+{% block content %}
+<div>{{ object.series_description}}</div>
+<div class='mt-3'>
+    <a class="btn btn-outline-primary" href="{% url 'refshelf:serieses' %}">К списку серий</a>    
+</div>
+{% endblock %}
     
