@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from .local_settings import LOCAL_HOSTS_ALLOWED
+from .local_settings import LOCAL_HOSTS_ALLOWED, static_root_variable, media_root_variable
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -126,8 +126,8 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'                                                                                                                                              
  
-STATIC_ROOT = ''
-MEDIA_ROOT = ''
+STATIC_ROOT = static_root_variable
+MEDIA_ROOT = media_root_variable
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
