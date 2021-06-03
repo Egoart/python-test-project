@@ -27,7 +27,7 @@ class AuthorUpdate(UpdateView):
 
 class AuthorDelete(DeleteView):
     model = models.Authors
-    success_url = reverse_lazy('authors')
+    success_url = reverse_lazy('refshelf:authors')
 
 class GenreDetails(DetailView):
     model = models.Genre
@@ -45,7 +45,7 @@ class GenreUpdate(UpdateView):
 
 class GenreDelete(DeleteView):
     model = models.Genre
-    success_url = reverse_lazy('genres')
+    success_url = reverse_lazy('refshelf:genres')
 
 class PublisherDetails(DetailView):
     model = models.Publisher
@@ -63,7 +63,7 @@ class PublisherUpdate(UpdateView):
 
 class PublisherDelete(DeleteView):
     model = models.Publisher
-    success_url = reverse_lazy('publishers')
+    success_url = reverse_lazy('refshelf:publishers')
 
 class SeriesDetails(DetailView):
     model = models.BookSeries
@@ -81,7 +81,7 @@ class SeriesUpdate(UpdateView):
 
 class SeriesDelete(DeleteView):
     model = models.BookSeries
-    success_url = reverse_lazy('serieses')
+    success_url = reverse_lazy('refshelf:serieses')
 
 
 

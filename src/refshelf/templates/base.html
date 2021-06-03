@@ -33,11 +33,10 @@
                   Справочники
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'authors' %}">Авторы</a></li>
-                  <li><a class="dropdown-item" href="{% url 'genres' %}">Жанры</a></li>
-                  <li><a class="dropdown-item" href="{% url 'publishers' %}">Издательства</a></li>
-                  <li><a class="dropdown-item" href="{% url 'serieses' %}">Серии книг</a></li>
-                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'refshelf:authors' %}">Авторы</a></li>
+                  <li><a class="dropdown-item" href="{% url 'refshelf:genres' %}">Жанры</a></li>
+                  <li><a class="dropdown-item" href="{% url 'refshelf:publishers' %}">Издательства</a></li>
+                  <li><a class="dropdown-item" href="{% url 'refshelf:serieses' %}">Серии книг</a></li>
                 </ul>
               </li>
             </ul>

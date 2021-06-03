@@ -5,7 +5,7 @@
 {% block h1 %}Список серий книг:{% endblock %}
 {% block content %}
 <div class="mb-3 mt-1">
-  <a href="{% url 'series_create' %}" class="btn btn-primary">Добавить новую серию</a>
+  <a href="{% url 'refshelf:series_create' %}" class="btn btn-primary">Добавить новую серию</a>
 </div>
 <div>
   <table class="table table-bordered">
@@ -16,9 +16,9 @@
     <tbody>
       {% for series in object_list %}
       <tr>
-        <td><a href="{% url 'series' series.pk %}">{{ series }}</a></td>
-        <td><a href="{% url 'series_update' series.pk %}">Редактировать</a></td>
-        <td><a href="{% url 'series_delete' series.pk %}">Удалить</a></td>  
+        <td><a href="{% url 'refshelf:series' series.pk %}">{{ series }}</a></td>
+        <td><a href="{% url 'refshelf:series_update' series.pk %}">Редактировать</a></td>
+        <td><a href="{% url 'refshelf:series_delete' series.pk %}">Удалить</a></td>  
       </tr>
       {% endfor %}
     </tbody>

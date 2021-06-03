@@ -8,7 +8,7 @@
 
 <form method="post">{% csrf_token %}
      <input type="submit" value="Да, удалить" class="btn btn-danger">
-     <a href="{% url 'genres' %}" class="btn btn-warning">Нет, я передумал</a>
+     <a href="{% url 'refshelf:genres' %}" class="btn btn-warning">Нет, я передумал</a>
 </form>
 
 {% endblock %}

@@ -16,7 +16,7 @@ class Authors(models.Model):
         return f' {self.first_name} {self.last_name}'
 
     def get_absolute_url(self):
-        return reverse('author', kwargs={'pk': self.pk})    
+        return reverse('refshelf:author', kwargs={'pk': self.pk})    
 
     class Meta:
         verbose_name = 'Автор'
@@ -36,7 +36,7 @@ class Genre(models.Model):
         return f'{self.genre_name}'
 
     def get_absolute_url(self):
-        return reverse('genre', kwargs={'pk': self.pk})
+        return reverse('refshelf:genre', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Жанр'
@@ -56,7 +56,7 @@ class Publisher(models.Model):
         return f'Издательство {self.publisher_name}'
 
     def get_absolute_url(self):
-        return reverse('publisher', kwargs={'pk': self.pk})
+        return reverse('refshelf:publisher', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Издательство'
@@ -76,7 +76,7 @@ class BookSeries(models.Model):
         return f'Серия {self.series_name}'
 
     def get_absolute_url(self):
-        return reverse('series', kwargs={'pk': self.pk})
+        return reverse('refshelf:series', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Серия'
