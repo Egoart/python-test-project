@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from .local_settings import LOCAL_HOSTS_ALLOWED, static_root_variable, media_root_variable
+from . import local_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dre)s@*nw3#y&k9djj8oqm*&nr%@*mo)18-fwaor4n%wlof&x@'
+SECRET_KEY = local_settings.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = local_settings.DEBUG
 
-ALLOWED_HOSTS = LOCAL_HOSTS_ALLOWED
+ALLOWED_HOSTS = local_settings.ALLOWED_HOSTS
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'airports',
     'refshelf'
 ]
@@ -53,6 +54,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'proj.urls'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 TEMPLATES = [
     {
@@ -122,12 +127,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'                                                                                                                                              
- 
-STATIC_ROOT = static_root_variable
-MEDIA_ROOT = media_root_variable
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = local_settings.STATIC_ROOT
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
