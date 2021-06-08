@@ -6,7 +6,7 @@
 {% block h1 %}Добавить автора{% endblock %}
 
 {% block content %}
-<form method="post">{% csrf_token %}
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
     <div class="form-group">
         {{ form|crispy }}
     </div>

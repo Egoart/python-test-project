@@ -14,7 +14,7 @@ from pathlib import Path
 from . import local_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = local_settings.BASE_DIR
 
 
 # Quick-start development settings - unsuitable for production
@@ -131,8 +131,14 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = local_settings.STATIC_ROOT
 
+MEDIA_ROOT = local_settings.MEDIA_ROOT
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#Set development flag
+
+DEV_MODE = local_settings.DEV_MODE

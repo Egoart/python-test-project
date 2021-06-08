@@ -12,6 +12,11 @@ class Authors(models.Model):
         max_length=20
         )
 
+    picture = models.ImageField(
+        verbose_name='Фото автора',
+        upload_to ='authors//%Y/%m/%d/'
+    )
+
     def __str__(self) -> str:
         return f' {self.first_name} {self.last_name}'
 

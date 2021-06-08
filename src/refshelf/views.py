@@ -19,11 +19,11 @@ class AuthorList(ListView):
 
 class AuthorCreate(CreateView):
     model = models.Authors
-    fields = ['first_name', 'last_name']
+    fields = ['first_name', 'last_name', 'picture']
 
 class AuthorUpdate(UpdateView):
     model = models.Authors
-    fields = ['first_name', 'last_name']
+    fields = ['first_name', 'last_name', 'picture']
 
 class AuthorDelete(DeleteView):
     model = models.Authors

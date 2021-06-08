@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
+#import for media files
+from django.conf import settings
+from django.conf.urls.static import static
+
 from airports import views as airports_views
 from refshelf import views as refshelf_views
 
@@ -26,3 +30,7 @@ urlpatterns = [
     path('<code>', airports_views.airports),
     path('', airports_views.airports_home)
 ]
+
+if settings.DEV_MODE:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
