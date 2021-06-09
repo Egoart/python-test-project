@@ -4,6 +4,7 @@
 *.pyc
 __pycache__
 db.sqlite3
+db.sqlite3-journal
 media
 
 # Backup files # 
@@ -116,3 +117,7 @@ GitHub.sublime-settings
 .history
 settings.json
 .vscode/
+
+#my files
+local_settings.py
+my_local_settings.py
