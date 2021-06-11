@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Описание товара{% endblock %}
+    
+{% block h1 %}Книга: {{ object.book_title }} {% endblock %}
+  
+{% block content %}
+<div class="row">
+  <div class="col-sm-4">
+    <div class="card" style="width: 18rem;">
+        <img src=" {{ object.cover_picture.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="card-text"></p>
+        </div>
+    </div>
+    <div class='mt-3'>
+        <a class="btn btn-outline-primary" href="{% url 'books:books' %}">К списку товаров</a>    
+    </div>
+  </div>
+  <div class="col-sm-5">
+    <div class='pb-2'>ЖАНР(Ы): 
+      {% for obj in object.book_genres.all %}
+      <a href="" class='btn btn-outline-primary'>{{ obj }}</a>
+      {% endfor %}
+    </div>
+    <div class='pb-2'>АВТОР(Ы): 
+      {% for obj in object.book_authors.all %}
+      <a href="">{{ obj }}</a>
+      {% endfor %}
+    </div>
+    {% if object.book_series %}
+    <div class='pb-2'>
+      Книга из серии книг {{ object.book_series }}
+    </div>
+    {% endif %}
+    <div class='pb-2'>ГОД ИЗДАНИЯ: 
+      {{ object.book_year }}
+    </div>
+    <div class='pb-2'>ISBN: 
+      {{ object.book_icbn }}
+    </div>
+    <div class='pb-2'>ИЗДАТЕЛЬСТВО: 
+      {{ object.book_publisher }}
+    </div>
+    <div class='pb-2'>КОЛИЧЕСТВО СТРАНИЦ: 
+      {{ object.book_pages }}
+    </div>
+    <div class='pb-2'>ПЕРЕПЛЕТ: 
+      {{ object.book_bindings }}
+    </div>
+    <div class='pb-2'>ФОРМАТ КНИГИ: 
+      {{ object.book_format }}
+    </div>
+    <div class='pb-2'>ВЕС КНИГИ: 
+      {{ object.book_weight }} кг
+    </div>
+    <div class='pb-2'>ВОЗРАСТНЫЕ ОГРАНИЧЕНИЯ: 
+      {{ object.age_restrictions }}
+    </div>
+    <div class='pb-2'>РЕЙТИНГ КНИГИ: 
+      {{ object.book_rating }}
+    </div>
+  </div>
+  <div class="col-sm-3">
+    {% if object.is_available %}
+    <div class="pb-2 text-center">
+      УРА! ЕСТЬ В НАЛИЧИИ!
+    </div>
+    <div class="text-center">Осталось на складе: {{ object.book_quantity }} шт.</div>
+    <div class='mt-3'>
+      <p class="text-center"><strong>ЦЕНА: {{ object.book_price }} BYN</strong> </p>  
+    </div>
+    {% else %}
+    <div class="alert alert-danger text-center">
+      ТОВАР ОТСУТСТВУЕТ
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

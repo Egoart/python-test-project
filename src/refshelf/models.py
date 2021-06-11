@@ -58,7 +58,7 @@ class Publisher(models.Model):
         null=True
     )
     def __str__(self) -> str:
-        return f'Издательство {self.publisher_name}'
+        return f' {self.publisher_name}'
 
     def get_absolute_url(self):
         return reverse('refshelf:publisher', kwargs={'pk': self.pk})
@@ -78,7 +78,7 @@ class BookSeries(models.Model):
         null=True
     )
     def __str__(self) -> str:
-        return f'Серия {self.series_name}'
+        return f' {self.series_name}'
 
     def get_absolute_url(self):
         return reverse('refshelf:series', kwargs={'pk': self.pk})

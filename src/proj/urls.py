@@ -23,10 +23,12 @@ from django.conf.urls.static import static
 
 from airports import views as airports_views
 from refshelf import views as refshelf_views
+from books import views as book_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('refshelf/', include('refshelf.urls', namespace='refshelf')),
+    path('books/', include('books.urls', namespace='books')),
     path('<code>', airports_views.airports),
     path('', airports_views.airports_home)
 ]
