@@ -25,4 +25,5 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['latest_books'] = models.Book.objects.all().order_by('-id')[:4]
+        context['recommended_books'] = models.Book.objects.all().filter(is_recommended=True)
         return context

@@ -56,7 +56,9 @@ class Book(models.Model):
         )
     cover_picture = models.ImageField(
         verbose_name='Фото обложки',
-        upload_to ='book//%Y/%m/%d/'
+        upload_to ='book//%Y/%m/%d/',
+        blank=True, 
+        null=True
     )
     book_price = models.DecimalField(
         verbose_name='Стоимость книги, BYN', 
@@ -118,6 +120,12 @@ class Book(models.Model):
     is_available = models.BooleanField(
         verbose_name='В наличии',
         default=True
+    )
+    is_recommended = models.BooleanField(
+        verbose_name='Рекомендуемый товар',
+        default=False,
+        blank=True, 
+        null=True
     )
     age_restrictions = models.CharField(
         verbose_name='Возрастные ограничения',

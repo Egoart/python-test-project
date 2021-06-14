@@ -1,4 +1,5 @@
 {% extends "home_base.html" %}
+{% load static %}
 
 {% block title %}Книжный магазин{% endblock %}
 {% block h1 %}Добро пожаловать в электронный книжный магазин!{% endblock %}    
@@ -15,25 +16,32 @@
     {% for book in latest_books %}
         <div class="col-3 mb-3 mt-4">
             <div class="card border-primary h-100">
-                <img alt="" class="card-img-top" style='max-height: 18rem; object-fit: contain;' src="{{ book.cover_picture.url }}" />
+                {% if book.cover_picture %}
+                    <img alt="" class="card-img-top card-img-adjust" src="{{ book.cover_picture.url }}" />
+                    {% else %}
+                    <img alt="" class="card-img-top card-img-adjust" src="{% static 'img/blank-book-cover.png' %}" />
+                {% endif %}
                 <div class="card-body">
-                    <h4 class="card-title text-center">
-                        <a href="{% url 'books:book' book.pk %}">{{ book.book_title }}</a>
-                    </h4>
-                        <div class="text-center">
-                            <h5 class="font-weight-bold ">
+                    <div class="card-text text-center">
+                        {% for obj in book.book_authors.all %}
+                            {{ obj }}</br>
+                        {% endfor %}
+                      </div>
+                        <h4 class="card-title text-center"><a href="{% url 'books:book' book.pk %}" class='book-title-link'>{{ book.book_title }}</a></h4>
+                          <div class="text-center">
+                            <h6 class="font-weight-bold ">
                                 <strong>
                                     {% if book.book_price %}
-                                    {{ book.book_price}} BYN
+                                      {{ book.book_price}} BYN
                                     {% endif %}
                                 </strong>
-                            </h5>
-                        </div>
-                        <div class="card-text text-center">
-                            {% for obj in book.book_genres.all %}
-                                {{ obj }}
-                            {% endfor %}
-                        </div>
+                            </h6>
+                          </div>
+                            <div class="card-text text-center">
+                              {% for obj in book.book_genres.all %}
+                                  {{ obj }}</br>
+                              {% endfor %}
+                            </div>
                 </div>
             </div>    
         </div>
@@ -44,5 +52,40 @@
 </div>
 <div class="row mt-4 text-center">
     <h2>РЕКОМЕНДУЕМ ЗАКАЗАТЬ</h2>
+</div>
+<div class="row card-group">
+    {% for book in recommended_books %}
+        <div class="col-3 mb-3 mt-4">
+            <div class="card border-primary h-100">
+                {% if book.cover_picture %}
+                    <img alt="" class="card-img-top card-img-adjust" src="{{ book.cover_picture.url }}" />
+                    {% else %}
+                    <img alt="" class="card-img-top card-img-adjust" src="{% static 'img/blank-book-cover.png' %}" />
+                {% endif %}
+                <div class="card-body">
+                    <div class="card-text text-center">
+                        {% for obj in book.book_authors.all %}
+                            {{ obj }}</br>
+                        {% endfor %}
+                      </div>
+                        <h4 class="card-title text-center"><a href="{% url 'books:book' book.pk %}" class='book-title-link'>{{ book.book_title }}</a></h4>
+                          <div class="text-center">
+                            <h6 class="font-weight-bold ">
+                                <strong>
+                                    {% if book.book_price %}
+                                      {{ book.book_price}} BYN
+                                    {% endif %}
+                                </strong>
+                            </h6>
+                          </div>
+                            <div class="card-text text-center">
+                              {% for obj in book.book_genres.all %}
+                                  {{ obj }}</br>
+                              {% endfor %}
+                            </div>
+                </div>
+            </div>    
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

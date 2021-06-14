@@ -1,0 +1,17 @@
+/* Navbar color */
+
+.navbar {
+    background-color: #1a1e21;
+}
+
+/* Card inmage in book catalogue. Adjust by size and position */
+.card-img-adjust {
+    max-height: 18rem; 
+    object-fit: contain;
+}
+
+/* No underline for title in book catalogue */
+.book-title-link {
+    text-decoration: none;
+    color: rgb(47, 47, 78);
+}
