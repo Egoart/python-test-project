@@ -52,17 +52,20 @@
         </div>
       </nav>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="mt-4 mb-5 text-center">
-            <h1>{% block h1 %}Page name{% endblock %}</h1>
+    <div class="bg-dark text-secondary px-4 py-5 text-center">
+        <div class="py-5">
+          <h1 class="display-5 fw-bold text-white">{% block h1 %}Page name{% endblock %}</h1>
+          <div class="col-lg-6 mx-auto">
+            <p class="fs-5 mb-4">{% block hero-content %}{% endblock %}</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
+              <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
+            </div>
           </div>
-          <div>
-            {% block content %}{% endblock %}
-          </div>          
-        </div>   
+        </div>
       </div>
+    <div class="container">
+              {% block content %}{% endblock %}
     </div>
 
    <!-- Option 1: Bootstrap Bundle with Popper -->

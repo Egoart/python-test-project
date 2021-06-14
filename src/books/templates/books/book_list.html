@@ -4,14 +4,14 @@
     
 {% block h1 %}КАТАЛОГ КНИГ:{% endblock %}
 {% block content %}
-<div class='row card-group'>
+<div class="row card-group">
   {% for book in object_list %}
-    <div class="col-4">
-      <div class="card border-primary mb-3 h-100">
+    <div class="col-4 mb-3">
+      <div class="card border-primary h-100">
             <img alt="" class="card-img-top" style='max-height: 18rem; object-fit: contain;' src="{{ book.cover_picture.url }}" />
         <div class="card-body">
           <h4 class="card-title text-center"><a href="{% url 'books:book' book.pk %}">{{ book.book_title }}</a></h4>
-            <div class='text-center'>
+            <div class="text-center">
               <h5 class="font-weight-bold ">
                   <strong>
                       {% if book.book_price %}

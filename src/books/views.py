@@ -5,7 +5,8 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView
+    DeleteView,
+    TemplateView
 )
 from . import models
 
@@ -17,3 +18,11 @@ class BookDetails(DetailView):
 
 class BookList(ListView):
     model = models.Book
+
+class HomeView(TemplateView):
+    template_name='books/home.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_books'] = models.Book.objects.all().order_by('-id')[:4]
+        return context
