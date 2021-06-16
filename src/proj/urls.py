@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('refshelf/', include('refshelf.urls', namespace='refshelf')),
     path('books/', include('books.urls', namespace='books')),
+    path('csvf/', include('csvf.urls', namespace='csvf')),
     path('', book_views.HomeView.as_view(), name='home'),
 ]
 

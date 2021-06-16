@@ -149,7 +149,10 @@ class Book(models.Model):
     )
 
     def __str__(self) -> str:        
-        return f' {self.book_title}'
+        return "%s (%s)" %(
+            self.book_title,
+            ", ".join(str(author) for author in self.book_authors.all()),
+        )
 
     def get_absolute_url(self):
         return reverse('refshelf:author', kwargs={'pk': self.pk})    
