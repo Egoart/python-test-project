@@ -21,12 +21,13 @@ from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from refshelf import views as refshelf_views
+#from refshelf import views as refshelf_views
 from books import views as book_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('refshelf/', include('refshelf.urls', namespace='refshelf')),
+    path('users/', include('users.urls', namespace='users')),
     path('books/', include('books.urls', namespace='books')),
     path('csvf/', include('csvf.urls', namespace='csvf')),
     path('', book_views.HomeView.as_view(), name='home'),

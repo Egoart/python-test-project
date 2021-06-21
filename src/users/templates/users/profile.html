@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Профиль пользователя {% endblock %}
+
+{% block h1 %}Профиль пользователя {{ user.username}} {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class='col-sm-8'>
+        <div class="">
+            <h4>Данные доступные для редактирования:</h4>
+        </div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ user_form|crispy }}
+                    {{ profile_form|crispy }}
+                </div>
+                <div class='mt-3'>
+                    <button type="submit" class="btn btn-primary">Обновить</button>
+                </div>
+                </form>
+    </div>
+    <div class='col-sm-4'>
+        <div class="mb-4 bg-primary text-white text-center">
+            {% if user.profile.is_staff %}
+                <h3>Сотрудник магазина</h3>
+            {% else %}
+            <h3>Дорогой наш клиент</h3>
+            {% endif %}
+        </div>
+        <div class="">
+            <h4>Ваш адресс:</h4>
+        </div>
+        <div>
+            <p>Страна: <b>{{ user.profile.country}}</b></p>
+            <p>Город: <b>{{ user.profile.city}}</b></p>
+            <p>Адрес: <b>{{ user.profile.address1}}</b></p>
+            <p>Дополнительный адрес: <b>{{ user.profile.address2}}</b></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

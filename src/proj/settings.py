@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'books',
     'refshelf',
-    'csvf'
+    'csvf',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -112,9 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Minsk'
 
 USE_I18N = True
 
@@ -143,3 +144,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #Set development flag
 
 DEV_MODE = local_settings.DEV_MODE
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'users:login'

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Вход на сайт {% endblock %}
+
+{% block h1 %}Вход на сайт {% endblock %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form|crispy }}
+    </div>
+    <div class='mt-3'>
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </div>
+    </form>
+    <div class='border-top mt-3'>
+        <small class='text-muted'>
+            Еще не зарегистрированы? <a class="" href="{% url 'users:register' %}">Присоеденяйтесь!</a>
+        </small>
+    </div>
+</div>
+{% endblock %}
