@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block title %}403 Error{% endblock %}
+
+{% block h1 %}У Вас нет доступа к этой странице{% endblock %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <div>Если Вы сотрудник магазина, авторизуйтесь в системе, чтобы получить доступ</div>
+    <div class='border-top mt-3 text-center'>
+        <small class=''>
+            <a class="" href="{% url 'users:login' %}">Войти</a></a>
+        </small>
+    </div>
+</div>
+{% endblock %}

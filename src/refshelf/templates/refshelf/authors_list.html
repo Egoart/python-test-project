@@ -4,9 +4,11 @@
     
 {% block h1 %}Список авторов:{% endblock %}
 {% block content %}
+{% if user.profile.sale_staff %}
 <div class="mb-3 mt-1">
   <a href="{% url 'refshelf:author_create' %}" class="btn btn-primary">Добавить нового автора</a>
 </div>
+{% endif %} 
 <div>
   <table class="table table-bordered">
     <thead>
@@ -17,8 +19,10 @@
       {% for author in object_list %}
       <tr>
         <td><a href="{% url 'refshelf:author' author.pk %}">{{ author }}</a></td>
+        {% if user.profile.sale_staff %}
         <td><a href="{% url 'refshelf:author_update' author.pk %}">Редактировать</a></td>
-        <td><a href="{% url 'refshelf:author_delete' author.pk %}">Удалить</a></td>  
+        <td><a href="{% url 'refshelf:author_delete' author.pk %}">Удалить</a></td>
+        {% endif %} 
       </tr>
       {% endfor %}
     </tbody>

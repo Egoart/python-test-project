@@ -6,10 +6,13 @@
 {% block h1 %}Профиль пользователя {{ user.username}} {% endblock %}
 
 {% block content %}
-<div class="row">
+<div class='row'>
     <div class='col-sm-8'>
-        <div class="">
+        <div class=''>
             <h4>Данные доступные для редактирования:</h4>
+        </div>
+        <div class='border-top mt-3 mb-3'>
+            <a class='' href="{% url 'users:password' %}">Сменить пароль</a></a>
         </div>
             <form action="" method="POST">
                 {% csrf_token %}
@@ -23,14 +26,15 @@
                 </form>
     </div>
     <div class='col-sm-4'>
-        <div class="mb-4 bg-primary text-white text-center">
-            {% if user.profile.is_staff %}
-                <h3>Сотрудник магазина</h3>
+        {% if user.profile.sale_staff %}
+        <div class="mb-4 p-1 bg-warning text-blue text-center">
+        <h3>Вы сотрудник магазина</h3>
             {% else %}
+        <div class="mb-3 p-1 bg-primary text-white text-center">
             <h3>Дорогой наш клиент</h3>
             {% endif %}
         </div>
-        <div class="">
+        <div class=''>
             <h4>Ваш адресс:</h4>
         </div>
         <div>

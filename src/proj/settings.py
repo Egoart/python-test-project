@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'books',
     'refshelf',
     'csvf',
-    'users',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [

@@ -9,7 +9,8 @@ from django.core.exceptions import ObjectDoesNotExist
 class Profile(models.Model):
     user = models.OneToOneField(
         User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='profile'
     )
     first_name = models.CharField(
         max_length=100,
@@ -49,7 +50,7 @@ class Profile(models.Model):
         blank=True,
         null=True
     )
-    is_staff = models.BooleanField(
+    sale_staff = models.BooleanField(
         default=False,
         verbose_name='Сотрудник магазина'
     )
@@ -67,3 +68,4 @@ class Profile(models.Model):
             instance.profile.save()
         except ObjectDoesNotExist:
             Profile.objects.create(user=instance)
+            print('Profile created')
