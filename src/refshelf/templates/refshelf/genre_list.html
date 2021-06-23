@@ -1,28 +1,28 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Список жанров{% endblock %}
     
 {% block h1 %}Список жанров:{% endblock %}
 {% block content %}
-<div class="mb-3 mt-1">
-  <a href="{% url 'refshelf:genre_create' %}" class="btn btn-primary">Добавить новый жанр</a>
-</div>
-<div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>        
-      </tr>
-    </thead>
-    <tbody>
+
+<div class="row card-group">
       {% for genre in object_list %}
-      <tr>
-        <td><a href="{% url 'refshelf:genre' genre.pk %}">{{ genre }}</a></td>
-        <td><a href="{% url 'refshelf:genre_update' genre.pk %}">Редактировать</a></td>
-        <td><a href="{% url 'refshelf:genre_delete' genre.pk %}">Удалить</a></td>  
-      </tr>
+      <div class="col-3 mb-3">
+        <div class="card border-primary h-100">
+             <img alt="" class="card-img-top card-img-adjust" src="{% static 'img/blank-book-cover.png' %}" />
+          <div class="card-body">
+            <div class="card-text text-center">
+            </div>
+              <h4 class="card-title text-center"><a href="{% url 'refshelf:genre' genre.pk %}">{{ genre }}</a></h4>
+                <div class="text-center">
+                  <h6 class="font-weight-bold ">
+                  </h6>
+                </div>
+          </div>
+        </div>
+      </div>
       {% endfor %}
-    </tbody>
-  </table>
 </div>
 {% endblock %}
     

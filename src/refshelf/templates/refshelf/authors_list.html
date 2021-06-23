@@ -1,31 +1,28 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Список авторов{% endblock %}
     
 {% block h1 %}Список авторов:{% endblock %}
 {% block content %}
-{% if user.profile.sale_staff %}
-<div class="mb-3 mt-1">
-  <a href="{% url 'refshelf:author_create' %}" class="btn btn-primary">Добавить нового автора</a>
-</div>
-{% endif %} 
-<div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>        
-      </tr>
-    </thead>
-    <tbody>
+ 
+<div class="row card-group">  
       {% for author in object_list %}
-      <tr>
-        <td><a href="{% url 'refshelf:author' author.pk %}">{{ author }}</a></td>
-        {% if user.profile.sale_staff %}
-        <td><a href="{% url 'refshelf:author_update' author.pk %}">Редактировать</a></td>
-        <td><a href="{% url 'refshelf:author_delete' author.pk %}">Удалить</a></td>
-        {% endif %} 
-      </tr>
+      <div class="col-3 mb-3">
+        <div class="card border-primary h-100">
+             <img alt="" class="card-img-top card-img-adjust" src="{% static 'img/blank-book-cover.png' %}" />
+          <div class="card-body">
+            <div class="card-text text-center">
+            </div>
+              <h4 class="card-title text-center"><a href="{% url 'refshelf:author' author.pk %}">{{ author }}</a></h4>
+                <div class="text-center">
+                  <h6 class="font-weight-bold ">
+                  </h6>
+                </div>
+          </div>
+        </div>
+      </div>
       {% endfor %}
-    </tbody>
-  </table>
+    
 </div>
 {% endblock %}

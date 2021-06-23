@@ -5,8 +5,16 @@
 {% block h1 %}Серия: {{ object.series_name }}{% endblock %}
     
 {% block content %}
-<div>{{ object.series_description}}</div>
-<div class='mt-3'>
+{% if user.profile.sale_staff %}
+<div class="my-1 d-flex flex-row">    
+        <div class='p-1'><a href="{% url 'stmanager:series_update' object.pk %}">Редактировать</a></div>
+        <div class='p-1'><a href="{% url 'stmanager:series_delete' object.pk %}">Удалить</a></div>    
+</div>
+{% endif %}
+<div>
+    {{ object.series_description}}
+</div>
+<div class='mt-3 text-center'>
     <a class="btn btn-outline-primary" href="{% url 'refshelf:serieses' %}">К списку серий</a>    
 </div>
 {% endblock %}

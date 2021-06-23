@@ -5,6 +5,12 @@
 {% block h1 %}Автор: {{ object.first_name }} {{ object.last_name }}{% endblock %}
   
 {% block content %}
+{% if user.profile.sale_staff %}
+<div class="my-1 d-flex flex-row">    
+        <div class='p-1'><a href="{% url 'stmanager:author_update' object.pk %}">Редактировать</a></div>
+        <div class='p-1'><a href="{% url 'stmanager:author_delete' object.pk %}">Удалить</a></div>    
+</div>
+{% endif %}
 <div class="card" style="width: 18rem;">
     <img src=" {{ object.picture.url }}" class="card-img-top" alt="...">
     <div class="card-body">

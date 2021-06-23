@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'refshelf',
     'csvf',
     'users.apps.UsersConfig',
+    'stmanager'
 ]
 
 MIDDLEWARE = [

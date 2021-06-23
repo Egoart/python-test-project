@@ -1,28 +1,32 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Список серий книг{% endblock %}
     
 {% block h1 %}Список серий книг:{% endblock %}
 {% block content %}
-<div class="mb-3 mt-1">
-  <a href="{% url 'refshelf:series_create' %}" class="btn btn-primary">Добавить новую серию</a>
-</div>
-<div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>        
-      </tr>
-    </thead>
-    <tbody>
-      {% for series in object_list %}
-      <tr>
-        <td><a href="{% url 'refshelf:series' series.pk %}">{{ series }}</a></td>
-        <td><a href="{% url 'refshelf:series_update' series.pk %}">Редактировать</a></td>
-        <td><a href="{% url 'refshelf:series_delete' series.pk %}">Удалить</a></td>  
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-{% endblock %}
+
+<div class="row card-group">
   
+      {% for series in object_list %}
+      <div class="col-3 mb-3">
+        <div class="card border-primary h-100">
+             <img alt="" class="card-img-top card-img-adjust" src="{% static 'img/blank-book-cover.png' %}" />
+          <div class="card-body">
+            <div class="card-text text-center">
+            </div>
+              <h4 class="card-title text-center"><a href="{% url 'refshelf:series' series.pk %}">{{ series }}</a></h4>
+                <div class="text-center">
+                  <h6 class="font-weight-bold ">
+                  </h6>
+                </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      
+    </div>
+    {% endblock %}
+    
+    
+    

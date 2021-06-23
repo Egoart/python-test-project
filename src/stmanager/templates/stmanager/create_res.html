@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block title %}Добавить новый объект {% endblock %}
+
+{% block h1 %}Добавить новый объект{% endblock %}
+
+{% block content %}
+{% if user.profile.sale_staff %}
+<div class="col-md-6 offset-md-3">
+    <div class='my-1 text-center'>
+        <a href="{% url 'stmanager:series_create' %}" class="btn btn-primary mt-1">Добавить новую серию книг</a>
+    </div>
+    <div class='my-1 text-center'>
+        <a href="{% url 'stmanager:publisher_create' %}" class="btn btn-primary">Добавить новое издательство</a>
+    </div>
+    <div class="my-1 text-center">
+        <a href="{% url 'stmanager:genre_create' %}" class="btn btn-primary">Добавить новый жанр</a>
+    </div>
+<div class="my-1 text-center">
+  <a href="{% url 'stmanager:author_create' %}" class="btn btn-primary">Добавить нового автора</a>
+</div>
+{% endif %}
+
+</div>
+{% endblock %}
