@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'refshelf',
     'csvf',
     'users.apps.UsersConfig',
-    'stmanager'
+    'stmanager',
+    'carts',
+    'orders'
 ]
 
 MIDDLEWARE = [

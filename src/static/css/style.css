@@ -1,7 +1,7 @@
 /* Navbar color */
 
-.navbar {
-    background-color: #1a1e21;
+.navbar-modif {
+    background-color: #264358 !important;
 }
 
 /* Card inmage in book catalogue. Adjust by size and position */
@@ -10,8 +10,18 @@
     object-fit: contain;
 }
 
+
+
 /* No underline for title in book catalogue */
 .book-title-link {
     text-decoration: none;
     color: rgb(47, 47, 78);
+    font-size: small;
+}
+
+.footer-style {
+    margin-top: 8rem;
+    padding: 1rem;
+    background-color: #1a1e21;
+    color:beige;
 }

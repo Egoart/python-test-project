@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Заказ оформлен {% endblock %}
+
+{% block h1 %}Заказ успешно оформлен! {% endblock %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <div class='border-top mt-3 text-center'>
+        <p>Наш сотрудник свяжется с Вами в ближайшее время!</p>
+        <small class=''>
+            <a class="" href="{% url 'home' %}">Продолжить покупки</a></a>
+        </small>
+    </div>
+</div>
+{% endblock %}

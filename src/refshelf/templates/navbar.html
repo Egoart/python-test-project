@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-modif">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Книжный магазин</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,10 +27,9 @@
             </ul>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-info" type="submit">Search</button>
-        </form>
+        <div class='navbar-nav d-flex'>
+          <a class="nav-link" href="{% url 'carts:cart_detail' %}"><i class="bi bi-cart"></i></i>Корзина</a>
+        </div>>        
         <div class=" navbar-nav d-flex">
           {% if user.is_authenticated %}
             {% if user.profile.sale_staff %}
@@ -55,3 +54,15 @@
       </div>
     </div>
   </nav>
+  <div class='container-fluid my-1'>
+  <div class='row justify-content-md-center '>
+    <div class="col-md-2"></div>
+    <div class="col-md-auto">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Название книги... " aria-label="Поиск">
+        <button class="btn btn-default" type="submit">Поиск</button>
+      </form>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>

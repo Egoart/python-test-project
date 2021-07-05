@@ -30,6 +30,8 @@ urlpatterns = [
     path('users/', include('users.urls', namespace='users')),
     path('books/', include('books.urls', namespace='books')),
     path('csvf/', include('csvf.urls', namespace='csvf')),
+    path('order/', include('orders.urls', namespace='orders')),
+    path('cart/', include('carts.urls', namespace='carts')),
     path('stmanager/', include('stmanager.urls', namespace='stmanager')),
     path('', book_views.HomeView.as_view(), name='home'),
 ]

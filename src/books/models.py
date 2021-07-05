@@ -155,7 +155,7 @@ class Book(models.Model):
         )
 
     def get_absolute_url(self):
-        return reverse('refshelf:author', kwargs={'pk': self.pk})    
+        return reverse('books:book', kwargs={'pk': self.pk})    
 
     class Meta:
         verbose_name = 'Книга'

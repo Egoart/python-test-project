@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+
+{% block title %}Корзина{% endblock %}
+    
+{% block h1 %}Корзина{% endblock %}
+{% block content %}
+ 
+<div class="">
+    {% if object.cart_items.all %} 
+    <div>
+        {% if user.is_authenticated %}
+            <p>Уважаемый {{ user.profile.first_name }}! Вы выбрали следующие товары для заказа:</p>
+        {% else %}
+            <p>Вы выбрали следующие товары для заказа:</p>
+        {% endif %}
+    </div>
+    <form action="{% url 'carts:update-cart' %}" method="POST">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Товар</th>
+                <th scope="col">Количество</th>
+                <th scope="col">Стоимость, за шт.</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>           
+                {% for line in object.cart_items.all %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ line.book }}</td>
+                    <td><input class='form-control' type='number' min='1' step='1' name="item-quantity_{{ line.pk }}" value='{{ line.quantity }}'></td>
+                    <td>{{ line.item_total_price }}</td>
+                    <td>
+                        <a href="{% url 'carts:delete-cart-item' line.pk %}" class="btn btn-xs btn-light">Удалить</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3"><b>Суммарная стоимость:</b></td>
+                    <td><b>{{ object.cart_total_price }}</b></td>
+                    <td></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+        <div class='mt-2'>
+            {% csrf_token %} 
+            <button type='submit' value='save-cart' class='btn btn-secondary' name='submit'>Сохранить корзину</button>
+            <button type='submit' value='create-order' class='btn btn-danger' name='submit'>В заказ</button>
+        </div>
+    </form>
+    {% else %}
+    <div class='text-center'>
+        <h2>Ваша корзина пуста</h2>
+        <small class=''>
+            <a class="" href="{% url 'home' %}">Выбрать товары</a></a>
+        </small>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

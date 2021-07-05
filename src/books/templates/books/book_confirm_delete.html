@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Удалить книгу из каталога{% endblock %}
+    
+{% block h1 %} Вы действительно хотите удалить книгу  {{ object.book_title }} из каталога?{% endblock %}
+
+{% block content %}
+
+<form method="post">{% csrf_token %}
+     <input type="submit" value="Да, удалить" class="btn btn-danger">
+     <a href="{% url 'books:books' %}" class="btn btn-warning">Нет, я передумал</a>
+</form>
+
+{% endblock %}
