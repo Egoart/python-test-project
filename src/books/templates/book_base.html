@@ -12,13 +12,18 @@
     <main class="flex-shrink-0">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="mt-4 mb-5 text-center">
-              <h1>{% block h1 %}Page name{% endblock %}</h1>
+          <div class="col-md-9">
+            <div class="mb-3 text-center pale-text-block-1">
+              {% block h1 %}Page name{% endblock %}
             </div>
             <div>
               {% block content %}{% endblock %}
             </div>          
+          </div>
+          <div class="col-md-3">
+            <div class="mt-3 text-center">
+              {% block sideblock %}{% endblock %}
+            </div>
           </div>   
         </div>
       </div>

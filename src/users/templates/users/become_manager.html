@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block title %}Стать менеджером {% endblock %}
+
+{% block h1 %}Как стать менеджером магазина {% endblock %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <div class='border-top mt-3 text-center'>
+        <p>
+            Стать менеджером этого магазина очень просто. Для этого пройдите регистрацию на сайте. Во время регистрации в поле "Дополнительно" введите слово "Manager" (без кавычек). 
+        </p>
+        <small class=''>
+            <a class="" href="{% url 'users:register' %}">Зарегистрироваться</a></a>
+        </small>
+    </div>
+</div>
+{% endblock %}

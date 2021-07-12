@@ -7,33 +7,102 @@
 
 {% block content %}
 {% if user.profile.sale_staff %}
-<div class='row'>
-    <div class="col-md-4">
-        <div class="p-3 mb-3 text-left bg-info">
-        <h4>Добавить ресурс:</h4>
+<div class='row mb-3'>
+    <div class="col-md-12">
+        <div class="p-3 mb-3 text-center text-light bcg-block">
+        <h5>Добавить ресурс:</h5>
         </div>
-        <div class="my-1 text-left">
-            <a href="{% url 'stmanager:book_create' %}" class="btn btn-outline-dark btn-block">Добавить новую книгу</a>
-        </div>
-        <div class='my-1 text-left'>
-            <a href="{% url 'stmanager:series_create' %}" class="btn btn-outline-dark btn-block">Добавить новую серию книг</a>
-        </div>
-        <div class='my-1 text-left'>
-            <a href="{% url 'stmanager:publisher_create' %}" class="btn btn-outline-dark btn-block">Добавить новое издательство</a>
-        </div>
-        <div class="my-1 text-left">
-            <a href="{% url 'stmanager:genre_create' %}" class="btn btn-outline-dark btn-block">Добавить новый жанр</a>
-        </div>
-        <div class="my-1 text-left">
-        <a href="{% url 'stmanager:author_create' %}" class="btn btn-outline-dark btn-block">Добавить нового автора</a>
-        </div>
-    </div>
-    <div class="col-md-8">
-        <div class="p-3 mb-3 bg-warning text-center">
-            <h4>Заказы в магазине:</h4>
+        <div class="btn-group btn-group-sp" role="group" aria-label="add-resource">
+            <a href="{% url 'stmanager:book_create' %}" class="btn btn-outline-primary btn-block">Добавить новую книгу</a>
+            <a href="{% url 'stmanager:series_create' %}" class="btn btn-outline-primary btn-block">Добавить новую серию книг</a>
+            <a href="{% url 'stmanager:publisher_create' %}" class="btn btn-outline-primary btn-block">Добавить новое издательство</a>
+            <a href="{% url 'stmanager:genre_create' %}" class="btn btn-outline-primary btn-block">Добавить новый жанр</a>
+            <a href="{% url 'stmanager:author_create' %}" class="btn btn-outline-primary btn-block">Добавить нового автора</a>
+
         </div>
     </div>
 </div>
+<div class='row'>
+    <div class="col-md-12">
+        <div class="p-3 mb-3 text-light text-center bcg-block">
+            <h5>Пользователи:</h5>
+        </div>
+        <div class="mt-2">
+            <p>На сайте зарегистрировано {{ users|length }} пользователей</p>
+            <p></p>
+        </div>
+    </div>
+</div>        
+<div class='row'>
+    <div class="col-md-12">
+        <div class="p-3 mb-3 text-light text-center bcg-block">
+            <h5>Заказы в магазине:</h5>
+        </div>
+        <div class="mt-2">
+            <form action="{% url 'stmanager:create_res' %}#filter-form" class="d-flex" id="filter-form">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineradio1" value="" name="status_chk">
+                    <label class="form-check-label" for="inlineradio1">Все</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineradio2" value="Новый" name="status_chk">
+                    <label class="form-check-label" for="inlineradio2">Новые</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineradio3" value="В обработке" name="status_chk">
+                    <label class="form-check-label" for="inlineradio3">В обработке</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineradio3" value="Исполненный" name="status_chk">
+                    <label class="form-check-label" for="inlineradio3">Исполненные</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="inlineradio4" value="Неудавшийся" name="status_chk">
+                    <label class="form-check-label" for="inlineradio4">Неудавшиеся</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <button class="btn btn-sm btn-primary" type="submit" >Фильтровать</button>
+                  </div>
+            </form>
+        </div>
+        <div class="mt-2">
+            <table class="table table-bordered" id="order-table">
+                <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Заказ</th>
+                    <th scope="col">Клиент</th>
+                    <th scope="col">Контакт</th>
+                    <th scope="col">Дата создания</th>
+                    <th scope="col">Дата изменения</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody class='order-list'>           
+                    {% for line in object_list %}
+                    <tr class="{% cycle 'table-row1' 'table-row2' %}">
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            <a href="{% url 'stmanager:cart_ordered' line.cart.pk %}">{{ line.cart}}</a>
+                        </td>
+                        <td>{{ line.cart.customer }}</td>
+                        <td>{{ line.contact_info }}</td>
+                        <td>{{line.order_created|date:"SHORT_DATE_FORMAT"}}</td>
+                        <td>{{line.order_modified|date:"SHORT_DATE_FORMAT"}}</td>
+                        <td>{{line.order_status}}</td>
+                        <td>
+                            <a href="{% url 'stmanager:change_order_status' line.pk %}" class="btn btn-sm {% cycle 'btn-light' 'btn-outline-secondary'  %}">Изменить статус</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 
 {% endif %}
 

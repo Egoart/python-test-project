@@ -1,9 +1,16 @@
-{% extends "base.html" %}
+{% extends "book_base.html" %}
 {% load static %}
 
 {% block title %}Описание товара{% endblock %}
 
-{% block h1 %}Книга: {{ object.book_title }} {% endblock %}
+{% block h1 %}
+  Книга: <h2>{{ object.book_title }}</h2> </br>
+  <small>
+    {% for obj in object.book_authors.all %}
+          <a href="{% url 'refshelf:author' obj.pk %}">{{ obj }}</a>
+          {% endfor %}
+  </small> 
+{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -12,7 +19,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-6">
     <div class="card" style="width: 18rem;">
       {% if book.cover_picture %}
         <img alt="" class="card-img-top card-img-adjust" src="{{ book.cover_picture.url }}" />
@@ -23,76 +30,102 @@
           <p class="card-text"></p>
         </div>
     </div>
-    <div class='mt-3'>
-        <a class="btn btn-outline-primary" href="{% url 'books:books' %}">К списку товаров</a>    
-    </div>
   </div>
-  <div class="col-sm-5">
-    <div class='pb-2'>ЖАНР(Ы): 
-      {% for obj in object.book_genres.all %}
-      <a href="{% url 'refshelf:genre' obj.pk %}">{{ obj }}</a>
-      {% endfor %}
-    </div>
-    <div class='pb-2'>АВТОР(Ы): 
-      {% for obj in object.book_authors.all %}
-      <a href="{% url 'refshelf:author' obj.pk %}">{{ obj }}</a>
-      {% endfor %}
-    </div>
-    {% if object.book_series %}
-    <div class='pb-2'>
-      Книга из серии книг {{ object.book_series }}
-    </div>
-    {% endif %}
-    <div class='pb-2'>ГОД ИЗДАНИЯ: 
-      {{ object.book_year }}
-    </div>
-    <div class='pb-2'>ISBN: 
-      {{ object.book_icbn }}
-    </div>
-    <div class='pb-2'>ИЗДАТЕЛЬСТВО: 
-      {{ object.book_publisher }}
-    </div>
-    <div class='pb-2'>КОЛИЧЕСТВО СТРАНИЦ: 
-      {{ object.book_pages }}
-    </div>
-    <div class='pb-2'>ПЕРЕПЛЕТ: 
-      {{ object.book_bindings }}
-    </div>
-    <div class='pb-2'>ФОРМАТ КНИГИ: 
-      {{ object.book_format }}
-    </div>
-    <div class='pb-2'>ВЕС КНИГИ: 
-      {{ object.book_weight }} кг
-    </div>
-    <div class='pb-2'>ВОЗРАСТНЫЕ ОГРАНИЧЕНИЯ: 
-      {{ object.age_restrictions }}
-    </div>
-    <div class='pb-2'>РЕЙТИНГ КНИГИ: 
-      {{ object.book_rating }}
-    </div>
-  </div>
-  <div class="col-sm-3">
+  <div class="col-sm-6">
     {% if object.is_available %}
-    <div class="pb-2 text-center">
-      УРА! ЕСТЬ В НАЛИЧИИ!
+    <div class="p-2 text-center bcg-block-3">
+      <p>ЭТА КНИГА ЕСТЬ В НАЛИЧИИ!</p>
+      <p>На складе осталось {{ object.book_quantity }} шт.</p>
     </div>
-    <div class="text-center">Осталось на складе: {{ object.book_quantity }} шт.</div>
-    <div class='mt-3'>
+    <div class='mt-4'>
       <p class="text-center"><strong>ЦЕНА: {{ object.book_price }} BYN</strong> </p>  
+    </div>
+    <div class="mt-5 text-center">
+      <a href="{% url 'carts:cart_detail' %}?book_id={{ book.pk }}" class='btn btn-danger'>В корзину</a>
     </div>
     {% else %}
     <div class="alert alert-danger text-center">
       ТОВАР ОТСУТСТВУЕТ
     </div>
     {% endif %}
-    
+</div>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class='pb-2'>Жанр(ы): 
+        {% for obj in object.book_genres.all %}
+        <a href="{% url 'refshelf:genre' obj.pk %}">{{ obj }}</a>
+        {% endfor %}
+      </div>
+      {% if object.book_series %}
+      <div class='pb-2'>
+        Книга из серии книг {{ object.book_series }}
+      </div>
+      {% endif %}
+      <div class='pb-2'>Год издания: 
+        {{ object.book_year }}
+      </div>
+      <div class='pb-2'>ISBN: 
+        {{ object.book_icbn }}
+      </div>
+      <div class='pb-2'>Издательство: 
+        {{ object.book_publisher }}
+      </div>
+      <div class='pb-2'>Количество страниц: 
+        {{ object.book_pages }}
+      </div>
+      <div class='pb-2'>Переплет: 
+        {{ object.book_bindings }}
+      </div>
+      <div class='pb-2'>Формат книги: 
+        {{ object.book_format }}
+      </div>
+      <div class='pb-2'>Вес книги: 
+        {{ object.book_weight }} кг
+      </div>
+      <div class='pb-2'>Возрастные ограничения: 
+        {{ object.age_restrictions }}
+      </div>
+      <div class='pb-2'>Рейтинг: 
+        {{ object.book_rating }}
+      </div>
+      <div class='mt-6 text-center'>
+        <a class="btn btn-outline-primary" href="{% url 'books:books' %}">К списку товаров</a>    
+    </div>
+    </div>
+  </div>   
+  
+</div>
+{% endblock %}
+
+{% block sideblock %}
     {% if user.profile.sale_staff %}
-    <div class="mt-5 text-center">    
+    <div class="">    
         <h5>Управление товаром</h5>
               <div class='p-1'><a href="{% url 'stmanager:book_update' object.pk %}" class="btn btn-outline-warning">Редактировать</a></div>
               <div class='p-1'><a href="{% url 'stmanager:book_delete' object.pk %}" class="btn btn-outline-danger">Удалить</a></div>    
-      </div>
+    </div>
+    {% endif %}
+    <div class="mt-2">
+      {% if related_items %}
+        <h4>Возможно Вас заинтересует:</h4>
+        <div class="d-flex flex-column align-items-center p-2">          
+            {% for obj in related_items %}
+            <div class="card mb-2" style="width: 10rem;">
+              {% if obj.cover_picture %}
+                <img alt="" class="card-img-top card-img-adjust" src="{{ obj.cover_picture.url }}" />
+              {% else %}
+                <img alt="" class="card-img-top card-img-adjust" src="{% static 'img/blank-book-cover.png' %}" />
+              {% endif %}
+                <div class="card-body">
+                  <p class="card-text">
+                    <a href="{% url 'books:book' obj.pk %}">{{ obj.book_title }}</a>
+                  </p>
+                </div>
+            </div>
+            {% endfor %}
+          
+        </div>
       {% endif %}
-  </div>
-</div>
+    </div>
+
 {% endblock %}

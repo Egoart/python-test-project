@@ -46,6 +46,11 @@ class UserForm(UserCreationForm):
             'address2'
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+
+        self.fields['email'].required = True
+
 class UserUpdateForm(forms.ModelForm):
     
     class Meta:
@@ -73,3 +78,5 @@ class ProfileUpdateForm(forms.ModelForm):
             'phone', 
             'user_details'
         ]
+
+    

@@ -1,4 +1,5 @@
 from django.urls import path
+from stmanager.views import CartItemsDetail
 from users import views as users_views
 from django.contrib.auth import views as auth_views
 
@@ -11,4 +12,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('password/', users_views.ModifyPassword.as_view(template_name='users/change-password.html'), name='password'),
     path('password-success/', users_views.password_success, name='password-success'),
+    path('become-manager/', users_views.info_become_manager, name='become-manager'),
+    path('user_cart_ordered/<int:pk>/', users_views.CartItemsDetail.as_view(), name='user_cart_ordered'),
 ]

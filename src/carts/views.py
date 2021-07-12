@@ -1,4 +1,5 @@
 import django
+from django.contrib.auth.models import User
 
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
@@ -15,13 +16,26 @@ class CartView(DetailView):
 
     def get_object(self, queryset=None):
         #get cart
-        cart_id = self.request.session.get('cart_id')
-        cart, created = models.Cart.objects.get_or_create(
-            pk=cart_id,
-            defaults={},
-        )
+        if self.request.user.is_authenticated:
+            customer = self.request.user
+            print(customer)
+            cart_id = self.request.session.get('cart_id')
+            cart, created = models.Cart.objects.get_or_create(
+                pk=cart_id,
+                defaults={
+                    'customer':customer
+                },
+            )
+        else:
+            cart_id = self.request.session.get('cart_id')
+            cart, created = models.Cart.objects.get_or_create(
+                pk=cart_id,
+                defaults={
+                },
+            )    
         if created:
             self.request.session['cart_id'] = cart.pk
+        
        
         #get book id
         book_id = self.request.GET.get('book_id')

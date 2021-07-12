@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+#from django.contrib.auth.models import User
 from books.models import Book
 
 
@@ -43,6 +44,16 @@ class Cart(models.Model):
             cart_total_price += item.item_total_price
         return cart_total_price
 
+    @property
+    def book_count(self):
+        total_sold = 0
+        items_incart = self.cart_items.all()
+        if self.cart_items.book:
+            for item in items_incart:
+                total_sold += item.quantity
+        return total_sold
+
+
 class CartItems(models.Model):
     cart = models.ForeignKey(
         Cart,
@@ -81,3 +92,5 @@ class CartItems(models.Model):
     @property
     def item_total_price(self):
         return self.item_price*self.quantity
+
+    

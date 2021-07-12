@@ -8,7 +8,7 @@ urlpatterns = [
     path('series_create/', manager_views.SeriesCreate.as_view(), name='series_create'),
     path('series_update/<int:pk>/', manager_views.SeriesUpdate.as_view(), name='series_update'),
     path('series_delete/<int:pk>/', manager_views.SeriesDelete.as_view(), name='series_delete'),
-    path('create_res/', manager_views.resource_create, name='create_res'),
+    path('create_res/', manager_views.ViewOrders.as_view(), name='create_res'),
     path('publisher_create/', manager_views.PublisherCreate.as_view(), name='publisher_create'),
     path('publisher_update/<int:pk>/', manager_views.PublisherUpdate.as_view(), name='publisher_update'),
     path('publisher_delete/<int:pk>/', manager_views.PublisherDelete.as_view(), name='publisher_delete'),
@@ -21,4 +21,6 @@ urlpatterns = [
     path('book_create/', manager_views.BookCreate.as_view(), name='book_create'),
     path('book_update/<int:pk>/', manager_views.BookUpdate.as_view(), name='book_update'),
     path('book_delete/<int:pk>/', manager_views.BookDelete.as_view(), name='book_delete'),
+    path('cart_ordered/<int:pk>/', manager_views.CartItemsDetail.as_view(), name='cart_ordered'),
+    path('change_order_status/<int:pk>/', manager_views.UpdateOrderStatus.as_view(), name='change_order_status'),
 ]

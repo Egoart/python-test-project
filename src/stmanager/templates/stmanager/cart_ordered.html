@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+
+{% block title %}Детали заказа{% endblock %}
+    
+{% block h1 %}Детали заказа №{{order_detail.pk}}{% endblock %}
+{% block content %}
+ 
+<div class="">
+    <div class="row">
+        <div class='col-md-8'>
+            <p>
+                {% if object.customer %}
+                    <b>{{object}} - Клиент: {{object.customer}} </b>
+                {% else %}
+                    <b>{{object}} - Заказ сделал анонимный пользователь</b>
+                {% endif %} 
+            </p>
+            <p>
+                Контактная информация клиента (тел): {{order_detail.contact_info}}
+            </p>
+        </div>
+        <div class='col-md-4'>
+            <div class='p-1 text-center {{order_detail.status_color}}'>
+                Статус заказа: {{order_detail.order_status}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mt-1">
+                <p>Выбраны следующие товары для заказа:</p>
+        </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Товар</th>
+                    <th scope="col">Количество</th>
+                    <th scope="col">Стоимость, за шт.</th>
+                </tr>
+                </thead>
+                <tbody>           
+                    {% for line in object.cart_items.all %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ line.book }}</td>
+                        <td>{{ line.quantity }}</td>
+                        <td>{{ line.item_total_price }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3"><b>Суммарная стоимость:</b></td>
+                        <td><b>{{ object.cart_total_price }}</b></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            <div class='mt-2'>
+                <a href="{% url 'stmanager:change_order_status' object.pk %}" class="btn btn-xs btn-warning">Изменить статус</a>
+                <a href="{% url 'stmanager:create_res' %}" class="btn btn-xs btn-success">Вернуться в панель управления</a>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+{% endblock %}

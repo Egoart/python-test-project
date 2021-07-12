@@ -1,6 +1,7 @@
+from django import template
 from django.http import request
 from django.shortcuts import redirect, render
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView
 from . import models, forms
 from carts.models import Cart
 from django.http.response import HttpResponseRedirect
@@ -53,3 +54,4 @@ class CreateOrder(FormView):
         )
         context['object'] = cart
         return context
+

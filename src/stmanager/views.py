@@ -1,14 +1,20 @@
-from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.decorators import user_passes_test
+
+from django.contrib.auth import get_user_model
 from django.views.generic import (
     CreateView,
     UpdateView,
-    DeleteView
+    DeleteView,
+    ListView,
+    DetailView
 )
 from refshelf import models as refmodels
 from books import models as bookmodels
+from orders import models as ordermodels
+from carts import models as cartmodels
+from users import models as usermodel
+
 
 #Edit Authors
 
@@ -103,8 +109,7 @@ class SeriesDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user.profile.sale_staff == True
 
 
-def resource_create(request):
-    return render(request, 'stmanager/create_res.html')
+#Edit book
 
 class BookCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = bookmodels.Book
@@ -126,3 +131,51 @@ class BookDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.profile.sale_staff == True
+
+# def resource_create(request):
+#     return render(request, 'stmanager/create_res.html')
+
+
+
+class ViewOrders(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = ordermodels.Order
+    template_name = 'stmanager/create_res.html'
+
+    def test_func(self):
+        return self.request.user.profile.sale_staff == True
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        status_chk = self.request.GET.get('status_chk')
+        print(status_chk)
+        if status_chk:
+            return qs.filter(order_status__contains=status_chk) 
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users'] = usermodel.Profile.objects.all()
+        return context
+
+class UpdateOrderStatus(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = ordermodels.Order
+    fields = ['order_status']
+    template_name = 'stmanager/order_status_form.html'
+
+    def test_func(self):
+        return self.request.user.profile.sale_staff == True
+
+
+class CartItemsDetail(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    model = cartmodels.Cart
+    template_name='stmanager/cart_ordered.html'
+
+    def test_func(self):
+        return self.request.user.profile.sale_staff == True
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart_id = int(self.kwargs.get('pk'))
+        context['order_detail'] = ordermodels.Order.objects.get(cart=cart_id)
+        return context
+

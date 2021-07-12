@@ -2,13 +2,14 @@
 {% load static %}
 
 {% block title %}Книжный магазин{% endblock %}
-{% block h1 %}Добро пожаловать в электронный книжный магазин!{% endblock %}    
+{% block h1 %}Добро пожаловать в электронный книжный магазин! {% endblock %}    
 
 {% block hero-content %}
+<h3>В нашем магазине сейчас {{total_books.tot}} книг</h3>
 <p>Здесь Ваши любмые книги! Легко найти и заказать!</p>
 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
     <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
-    <a><button type="button" class="btn btn-outline-light btn-lg px-4">Стать сотрудником</button></a>
+    <a href="{% url 'users:become-manager' %}"><button type="button" class="btn btn-outline-light btn-lg px-4">Стать сотрудником</button></a>
   </div>
 {% endblock %}
 
@@ -58,6 +59,47 @@
 </div>
 <div class="row mt-4 text-center">
     <h2>ЧАЩЕ ВСЕГО ЗАКАЗЫВАЮТ</h2>
+    <div class="row card-group">
+    {% for book in sold_books %}
+            <div class="col-4 mb-3 mt-4">
+                <div class="card border-primary h-100">
+                    {% if book.cover_picture %}
+                        <img alt="" class="card-img-top card-img-adjust" src="{{ book.cover_picture.url }}" />
+                        {% else %}
+                        <img alt="" class="card-img-top card-img-adjust" src="{% static 'img/blank-book-cover.png' %}" />
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="card-text text-center">
+                            {% for obj in book.book_authors.all %}
+                                {{ obj }}</br>
+                            {% endfor %}
+                          </div>
+                            <h4 class="card-title text-center">
+                                <b><a href="{% url 'books:book' book.pk %}" class='book-title-link'>{{ book.book_title }}</a></b>
+                            </h4>
+                            <div class="card-text text-center">
+                                {% for obj in book.book_genres.all %}
+                                    {{ obj }}</br>
+                                {% endfor %}
+                            </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class=''>
+                          <h6 class="font-weight-bold ">
+                              <strong>
+                                  {% if book.book_price %}
+                                    {{ book.book_price}} BYN
+                                  {% endif %}
+                              </strong>
+                          </h6>
+                        </div>
+                        <a href="{% url 'carts:cart_detail' %}?book_id={{ book.pk }}" class='btn btn-danger'>В корзину</a></br>
+                        <small>Заказано {{ book.tot }} шт.</small>
+                      </div>
+                </div>    
+            </div>
+    {% endfor %}
+    </div>
 </div>
 <div class="row mt-4 text-center">
     <h2>РЕКОМЕНДУЕМ ЗАКАЗАТЬ</h2>

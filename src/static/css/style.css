@@ -1,3 +1,9 @@
+/* Sticky footer */
+
+main > .container {
+    padding-top: 60px;
+}
+
 /* Navbar color */
 
 .navbar-modif {
@@ -19,9 +25,60 @@
     font-size: small;
 }
 
+.currency_rate{
+    background-color: #d9bca7;
+    color:#18242e;
+    font-size: x-small;
+    margin: 0.5rem 2rem 0.2rem 0;
+    padding: 0.2rem;
+}
+
+.order-list {
+    font-size: x-small;
+}
+
+.small-font {
+    font-size: x-small;
+}
+
+.table-row1 {
+    background-color: #ededed;
+}
+
+.table-row2 {
+    background-color: none;
+}
+
+.bcg-block {
+    background-color: #8ba8b7;
+}
+
+.bcg-block-1 {
+    background-color: #4b778d;
+}
+
+.bcg-block-2 {
+    background-color: #9fbe97;
+}
+
+.bcg-block-3 {
+    background-color: #f7dcda;
+}
+
+
 .footer-style {
     margin-top: 8rem;
     padding: 1rem;
     background-color: #1a1e21;
     color:beige;
+}
+.pale-text-block {
+    background-color: #f5f5f5;
+    margin: 1rem;
+    padding: 2rem;
+}
+
+.pale-text-block-1 {
+    background-color: #e3eee2;
+    padding: 0.5rem;
 }
