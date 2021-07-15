@@ -36,13 +36,7 @@ class Cart(models.Model):
         verbose_name = 'Корзина'
         verbose_name_plural = 'Корзины'
 
-    @property
-    def cart_total_price(self):
-        cart_total_price = 0
-        items_incart = self.cart_items.all()
-        for item in items_incart:
-            cart_total_price += item.item_total_price
-        return cart_total_price
+    
 
     @property
     def book_count(self):
