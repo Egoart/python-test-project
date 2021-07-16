@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http.response import Http404
-#from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import PasswordChangeView
@@ -10,11 +10,11 @@ from users.forms import UserForm, UserUpdateForm, ProfileUpdateForm
 from .models import Profile
 from carts.models import Cart
 from orders.models import Order
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 
 # Create your views here.
-
+#restrict access to Cart page
 class CartItemsDetail(LoginRequiredMixin, DetailView):
     model = Cart
     template_name='users/user_cart_ordered.html'    
@@ -52,6 +52,8 @@ def register(request):
             user.profile.post_index = form.cleaned_data.get('post_index')
             user.profile.address1 = form.cleaned_data.get('address1')
             user.profile.address2 = form.cleaned_data.get('address2')
+            cgroup = Group.objects.get(name='Customer')
+            user.groups.add(cgroup) 
             user.save()        
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
@@ -66,8 +68,7 @@ def register(request):
 @login_required
 def profile(request):
 
-    customer = request.user
-    print(customer)           
+    customer = request.user           
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
@@ -76,12 +77,17 @@ def profile(request):
             user_form.save()
             profile_form.save()
             #Check if user enter secret world to become a shop manager
-            for u in Profile.objects.filter(user_details__contains='Manager'):
-                u.sale_staff = True
-                u.save()
-                # group = Group.objects.get(name='Manager')
-                # u.groups.add(group)
-                # u.save()
+            personel = Profile.objects.filter(user_details__contains='Manager')
+            if personel:
+                for u in personel:
+                    u.sale_staff = True
+                    mgroup = Group.objects.get(name='Manager')
+                    cgroup = Group.objects.get(name='Customer')
+                    customer.groups.add(mgroup)
+                    customer.groups.remove(cgroup)
+                    u.save()
+            
+
             return redirect('users:profile')
     else:
         user_form = UserUpdateForm(instance=request.user)
