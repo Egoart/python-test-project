@@ -8,7 +8,7 @@
 <h3>В нашем магазине сейчас {{total_books.tot}} книг</h3>
 <p>Здесь Ваши любмые книги! Легко найти и заказать!</p>
 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-    <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
+    <a href="{% url 'books:books' %}"><button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Каталог</button></a>
     <a href="{% url 'users:become-manager' %}"><button type="button" class="btn btn-outline-light btn-lg px-4">Стать сотрудником</button></a>
   </div>
 {% endblock %}
